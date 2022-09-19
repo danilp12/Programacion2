@@ -9,6 +9,14 @@ def generar():
     else:
         n3 = 0
         result.set(n3)
+        popup()
+
+def popup():
+    pop = tk.Toplevel()
+    pop.geometry("300x50")
+    tk.Label(pop,text="El numero 1 debe ser mas grande que el numero 2").grid()
+    tk.Button(pop,text="Ok",command=pop.destroy).grid()
+
 ventana = tk.Tk()
 ventana.title("Generador de numeros ")
 result = tk.IntVar()

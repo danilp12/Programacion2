@@ -17,6 +17,8 @@ def restar():
     valor.set(result)
 def reset():
     valor.set(0)
+    n1.set(0)
+    n2.set(0)
 ventana = tk.Tk()
 ventana.title("calculadora ")
 n1 = tk.IntVar(value=0)
