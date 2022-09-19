@@ -1,11 +1,12 @@
 
-import re
-from statistics import variance
-import tkinter as tk
-import random
 
+import tkinter as tk
+import random, time
+inicio = ""
 dif = "Facil"
+tiempojuego = 30
 comando =""
+temp = True
 def calcular():
     global comando
     if operacion.get() == 1:
@@ -64,10 +65,16 @@ def restar():
     result = int(n1.get())- int(n2.get())
     return result
 def go():
-    global comando
+    global comando, temp
     retornar(comando)
+    tiempo.set("--")
+    temp = False
+    return temp
 def nuevonum():
-    global n1,n2, dif
+    global n1,n2, dif, inicio, temp
+    temp = True
+    inicio = time.time()
+    temporizador()
     if dif == "Facil":
         n1.set(random.randint(0,10))
         n2.set( random.randint(0,10))
@@ -77,29 +84,56 @@ def nuevonum():
     elif dif == "Dificil":
         n1.set(random.randint(0,1000))
         n2.set( random.randint(0,1000))
+    return inicio
 
 def setdificultad():
-    global dif
+    global dif, tiempojuego
     if dificultad.get() == 1:
         dif = "Facil"
+        tiempojuego = 60
         resetearcontadores()
-        return dif
+        return dif,tiempojuego
     elif dificultad.get() == 2:
         dif = "Medio"
+        tiempojuego = 45
         resetearcontadores()
-        return dif
+        return dif, tiempojuego
     elif dificultad.get() == 3:
         dif = "Dificil"
+        tiempojuego = 30
         resetearcontadores()
-        return dif
+        return dif, tiempojuego
 def resetearcontadores():
-    global cantbuenos,cantjuegos,cantmalos
+    global cantbuenos,cantjuegos,cantmalos, temp
     cantmalos.set(0)
     cantbuenos.set(0)
     cantjuegos.set(0)
     n1.set(0)
     n2.set(0)
     valor.set(0)
+    temp = False
+
+def temporizador():
+    global inicio ,temp 
+    if temp:
+        now = time.time()
+        actual =str (now-inicio)[0:3]
+        
+        if float(actual) == float(tiempojuego):
+            tiempo.set("--")
+            perdido()
+            cantjuegos.set(cantjuegos.get()+1)
+            cantmalos.set(cantmalos.get()+1)
+        else:
+            tiempo.set(actual + " Segundos")
+            ventana.after(1000, temporizador)
+    
+    
+def perdido():
+    pop = tk.Toplevel()
+    pop.geometry("100x50")
+    tk.Label(pop,text="Has perdido el turno").grid()
+    tk.Button(pop,text="Ok",command=pop.destroy).grid()
 
 ventana = tk.Tk()
 ventana.title("Juego Matematico ")
@@ -149,12 +183,16 @@ nummalos.grid(column=3,row=3,padx=20)
 dificultad = tk.IntVar()
 lbld = tk.Label(ventana,text="Dificultad")
 lbld.grid(column=2,row=5)
-facil = tk.Radiobutton(ventana,text="Facil",command=setdificultad,variable=dificultad,value=1)
+facil = tk.Radiobutton(ventana,text="Facil - Numeros del 0-10 - (60 Seg)",command=setdificultad,variable=dificultad,value=1)
 facil.grid(column=2,row=6)
-medio = tk.Radiobutton(ventana,text="Medio",command=setdificultad,variable=dificultad,value=2)
+medio = tk.Radiobutton(ventana,text="Medio - Numeros del 0-100 -(45 Seg)",command=setdificultad,variable=dificultad,value=2)
 medio.grid(column=2,row=7)
-dificil = tk.Radiobutton(ventana,text="Dificil",command=setdificultad,variable=dificultad,value=3)
+dificil = tk.Radiobutton(ventana,text="Dificil - Numeros del 0-1000 -(30 Seg)",command=setdificultad,variable=dificultad,value=3)
 dificil.grid(column=2,row=8)
+
+tiempo = tk.StringVar()
+tempo = tk.Label(ventana,text="Tiempo").grid()
+tiempolbl = tk.Label(ventana,textvariable=tiempo).grid()
 
 valor = tk.IntVar(value=0)
 lbl3 = tk.Label(ventana,text="Resultado").grid()
