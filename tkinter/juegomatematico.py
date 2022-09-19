@@ -54,9 +54,15 @@ def multi():
     if int(n1.get()) !=0 and int(n2.get()) !=0:
         result = int(n1.get())* int(n2.get())
         return result
+    else:
+        result = 0
+        return result
 def divi():
     if int(n1.get()) !=0 and int(n2.get()) !=0:
         result = int(n1.get())/ int(n2.get())
+        return result
+    else:
+        result = 0
         return result
 def suma():
    result = int(n1.get())+ int(n2.get())
