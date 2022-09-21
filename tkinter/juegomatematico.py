@@ -1,7 +1,7 @@
 
 
 import tkinter as tk
-import random, time
+import random, time, os
 inicio = ""
 dif = "Facil"
 tiempojuego = 30
@@ -75,6 +75,9 @@ def go():
     retornar(comando)
     tiempo.set("--")
     temp = False
+    n1.set(0)
+    n2.set(0)
+    valor.set(0)
     return temp
 def nuevonum():
     global n1,n2, dif, inicio, temp
@@ -142,52 +145,53 @@ def perdido():
     tk.Label(pop,text="Has perdido el turno",bg="#e4844a",font="Helvetica").grid()
     tk.Button(pop,text="Ok",command=pop.destroy,bg="#e4844a",font="Helvetica").grid()
 
+#   Ventana Principal
 ventana = tk.Tk()
 ventana.title("Juego Matematico ")
 ventana.configure(bd=5,bg="#e4844a",padx=20,pady=20)
 
 
-operacion = tk.IntVar()
+#       Campo numero 1
 n1 = tk.IntVar(value=0)
 lbl1 = tk.Label(ventana,text="Numero 1",font="Helvetica",background="#ba1e4a").grid(column=0,row=0,padx=5,pady=5)
 entr1 = tk.Entry(ventana,textvariable=n1,state="readonly",font="Helvetica",background="#e4844a",width=5).grid(column=0,row=1)
-
+#       Campo numero 2
 n2= tk.IntVar(value=0)
 lbl2 = tk.Label(ventana,text="Numero 2",font="Helvetica",background="#ba1e4a").grid(column=0,row=2,padx=5,pady=5)
 entry2 = tk.Entry(ventana,textvariable=n2,state="readonly",font="Helvetica",background="#e4844a",width=5).grid(column=0,row=3)
-
+#       Boton de nuevo numero
 nuevo = tk.Button(ventana,text="Nuevo Numero",command=nuevonum,font="Helvetica",background="#b68810",border=10).grid(column=0,row=4,padx=5,pady=5)
-
+#       Operaciones
+operacion = tk.IntVar()
 lblo = tk.Label(ventana,text="Operaciones",font="Helvetica",background="#ba1e4a").grid(column=1, row=0,padx=5,pady=5)
 sumar = tk.Radiobutton(ventana,text="Sumar",command=calcular,variable=operacion,value=1,background="#e4844a")
 resta = tk.Radiobutton(ventana,text="Restar",command=calcular,variable=operacion,value=2,background="#e4844a")
 multiplicar = tk.Radiobutton(ventana,text="Multiplicacion",command=calcular,variable=operacion,value=3,background="#e4844a")
 division = tk.Radiobutton(ventana,text="Dividir",command=calcular,variable=operacion,value=4,background="#e4844a")
-
 sumar.grid(column=1, row=1)
 resta.grid(column=1, row=2)
 multiplicar.grid(column=1, row=3)
 division.grid(column=1, row=4)
-
+#       Stat Juego
 cantjuegos = tk.IntVar(0)
-juegos = tk.Label(ventana,text=f"Juegos: ",font="Helvetica",background="#e4844a",width=10)
+juegos = tk.Label(ventana,text=f"Juegos:",font="Helvetica",background="#e4844a",width=10)
 juegos.grid(column=1,row=6)
 numjuegos = tk.Label(ventana,textvariable=cantjuegos,font="Helvetica",background="#e4844a",width=5)
 numjuegos.grid(column=2,row=6,padx=5)
-
+#       Stat Ganados
 cantbuenos = tk.IntVar()
-buenos = tk.Label(ventana,text="Buenos: ",font="Helvetica",background="#e4844a",width=10)
+buenos = tk.Label(ventana,text="Buenos:",font="Helvetica",background="#e4844a",width=10)
 buenos.grid(column=1,row=7)
 numbuenos = tk.Label(ventana,textvariable=cantbuenos,font="Helvetica",background="#e4844a",width=5)
 numbuenos.grid(column=2,row=7,padx=5)
-
+#       Stat Perdidos
 cantmalos = tk.IntVar()
-malos = tk.Label(ventana,text="Malos: ",font="Helvetica",background="#e4844a",width=10)
+malos = tk.Label(ventana,text="Malos:",font="Helvetica",background="#e4844a",width=10)
 malos.grid(column=1,row=8)
 nummalos = tk.Label(ventana,textvariable=cantmalos,font="Helvetica",background="#e4844a",width=5)
 nummalos.grid(column=2,row=8,padx=5)
 
-
+#       Dificultad
 dificultad = tk.IntVar()
 lbld = tk.Label(ventana,text="Dificultad",font="Helvetica",background="#ba1e4a")
 lbld.grid(column=3,row=0)
@@ -197,15 +201,19 @@ medio = tk.Radiobutton(ventana,text="Medio - Numeros del 0-100 -(45 Seg)",comman
 medio.grid(column=3,row=2)
 dificil = tk.Radiobutton(ventana,text="Dificil - Numeros del 0-1000 -(30 Seg)",command=setdificultad,variable=dificultad,value=3,background="#e4844a")
 dificil.grid(column=3,row=3)
-
+#       Tiempo
 tiempo = tk.StringVar()
 tempo = tk.Label(ventana,text="Tiempo",font="Helvetica",background="#ba1e4a").grid(column=0,row=6,padx=5,pady=5)
 tiempolbl = tk.Label(ventana,textvariable=tiempo,font="Helvetica",background="#e8bf56").grid(column=0,row=7,padx=5,pady=5)
-
+#       Resultado
 valor = tk.IntVar(value=0)
 lbl3 = tk.Label(ventana,text="Resultado",font="Helvetica",background="#ba1e4a").grid(column=0,row=8,padx=5,pady=5)
 entry3 = tk.Entry(ventana,textvariable=valor,font="Helvetica",width=5).grid(column=0,row=9,padx=5,pady=5)
 
-
+#       Imagen
+imagen = tk.PhotoImage(file=os.getcwd()+"\\tkinter\imagen.png")
+img = tk.Label(ventana,image=imagen,borderwidth=0)
+img.grid(column=3,row=6,rowspan=3)
+#       Boton Resultado
 btn = tk.Button(ventana,text="Resultado",command=go,font="Helvetica",background="#b68810",border=10).grid(column=0,row=10, pady=20)
 ventana.mainloop()
