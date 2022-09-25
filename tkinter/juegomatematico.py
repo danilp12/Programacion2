@@ -252,4 +252,5 @@ img = tk.Label(ventana,image=imagen,borderwidth=0)
 img.grid(column=3,row=6,rowspan=3)
 #       Boton Resultado
 btn = tk.Button(ventana,text="Resultado",command=go,font="Helvetica",background="#b68810",border=10).grid(column=0,row=11, pady=20)
+
 ventana.mainloop()
