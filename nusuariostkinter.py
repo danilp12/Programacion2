@@ -95,18 +95,32 @@ def mostrarmsj():
         nuevomarco()
         calcular()
         msj.set(f"El numero que pensaste es: ")
-        lll = tk.Label(frame,text=f"{valorFinal.get()}",font="Helvetica").pack()
+        lll = tk.Label(frame,text=f"{valorFinal.get()}",font=("Helvetica",26)).pack()
+        btnatras = tk.Button(frame,text="Atras",command=back).pack(side="left")
+        btnsig = tk.Button(frame,text="Reiniciar",command=restart).pack(side="right")
     elif paso == 5 and lang.get() == 1:
         nuevomarco()
         calcular()
         msj.set(f"The number you thought is: ")
-        lll = tk.Label(frame,text=f"{valorFinal.get()}",font="Helvetica").pack()
+        lll = tk.Label(frame,text=f"{valorFinal.get()}",font=("Helvetica",26)).pack()
+        btnatras = tk.Button(frame,text="Back",command=back).pack(side="left")
+        btnsig = tk.Button(frame,text="Restart",command=restart).pack(side="right")
 def nuevomarco():
     global frame
     frame.pack_forget()
-    frame = tk.LabelFrame(ventana,text="Adivinanza de numeros")
-    frame.pack(fill="both",expand="yes")
-    lblmsj = tk.Label(frame,textvariable=msj).pack()
+    if lang.get() == 2:
+        frame = tk.LabelFrame(ventana,text="Adivinanza de numeros")
+        frame.pack(fill="both",expand="yes")
+        lblmsj = tk.Label(frame,textvariable=msj).pack()
+    elif lang.get() == 1:
+        frame = tk.LabelFrame(ventana,text="Number riddle")
+        frame.pack(fill="both",expand="yes")
+        lblmsj = tk.Label(frame,textvariable=msj).pack()
+def restart():
+    global paso
+    paso = -1
+    mostrarmsj()
+    return paso
 def asignarresta():
     global valorResta,resta
     valorResta.set(resta.get())
@@ -145,6 +159,7 @@ ventana.configure(bd=5,bg="#e4844a",padx=20,pady=20)
 ventana.geometry("400x180")
 op = tk.IntVar()
 lang = tk.IntVar()
+lang.set(2)
 valorResta = tk.IntVar()
 valorSuma = tk.IntVar()
 valorFinal = tk.IntVar()
