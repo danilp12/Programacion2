@@ -2,6 +2,9 @@
 import tkinter as tk
 #   Variables Globales
 paso = -1
+ffont = ("Lucida Console",13)
+fontentry = ("Lucida Console",28)
+fontboton = ("Helvetica",13)
 #   Funciones
 def mostrarmsj():
     global valorResta,valorSuma,valorFinal,op,resta,suma
@@ -9,113 +12,117 @@ def mostrarmsj():
         global lang
         nuevomarco()
         msj.set("Elija el lenguaje")
-        eng = tk.Radiobutton(frame,text="English",variable=lang,value=1).pack()
-        esp = tk.Radiobutton(frame,text="Español",variable=lang,value=2).pack()
-        btnsig = tk.Button(frame,text="Siguiente/Next",command=next).pack(side="right")
+        eng = tk.Radiobutton(frame,text="English",variable=lang,value=1,font=ffont,bg="#8b9e9b").pack()
+        esp = tk.Radiobutton(frame,text="Español",variable=lang,value=2,font=ffont,bg="#8b9e9b").pack()
+        btnsig = tk.Button(frame,text="Siguiente/Next",command=next,bg="#8b9e9b",font=fontboton).pack(side="right")
         return lang
     elif paso == 0 and lang.get() == 2:
         nuevomarco()
         msj.set("Pensa un numero de dos cifras que no sean iguales..")
-        btnatras = tk.Button(frame,text="Atras",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Siguiente",command=next).pack(side="right")
+        btnatras = tk.Button(frame,text="Atras",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Siguiente",command=next,bg="#8b9e9b",font=fontboton).pack(side="right")
     elif paso == 0 and lang.get() == 1:
         nuevomarco()
         msj.set("Think of a two-digit number that is not the same..")
-        btnatras = tk.Button(frame,text="Back",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Next",command=next).pack(side="right")
+        btnatras = tk.Button(frame,text="Back",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Next",command=next,bg="#8b9e9b",font=fontboton).pack(side="right")
     elif paso == 1 and lang.get() == 2:
         nuevomarco()
         msj.set("Ahora invierte las cifras del numero")
-        btnatras = tk.Button(frame,text="Atras",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Siguiente",command=next).pack(side="right")
+        btnatras = tk.Button(frame,text="Atras",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Siguiente",command=next,bg="#8b9e9b",font=fontboton).pack(side="right")
     elif paso == 1 and lang.get() == 1:
         nuevomarco()
         msj.set("Now reverse the digits of the number")
-        btnatras = tk.Button(frame,text="Back",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Next",command=next).pack(side="right")
+        btnatras = tk.Button(frame,text="Back",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Next",command=next,bg="#8b9e9b",font=fontboton).pack(side="right")
     elif paso == 2 and lang.get() == 2:
         nuevomarco()
         msj.set("El numero invertido es mayor que el numero pensado?")
-        si = tk.Radiobutton(frame,text="Si",variable=op,value=1).pack()
-        no = tk.Radiobutton(frame,text="No",variable=op,value=2).pack()
-        btnatras = tk.Button(frame,text="Atras",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Siguiente",command=next).pack(side="right")
+        si = tk.Radiobutton(frame,text="Si",variable=op,value=1,bg="#8b9e9b",font=ffont).pack()
+        no = tk.Radiobutton(frame,text="No",variable=op,value=2,bg="#8b9e9b",font=ffont).pack()
+        btnatras = tk.Button(frame,text="Atras",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Siguiente",command=next,bg="#8b9e9b",font=fontboton).pack(side="right")
         return op
     elif paso == 2 and lang.get() == 1:
         nuevomarco()
         msj.set("Is the inverted number greater than the intended number?")
-        si = tk.Radiobutton(frame,text="Yes",variable=op,value=1).pack()
-        no = tk.Radiobutton(frame,text="No",variable=op,value=2).pack()
-        btnatras = tk.Button(frame,text="Back",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Next",command=next).pack(side="right")
+        si = tk.Radiobutton(frame,text="Yes",variable=op,value=1,bg="#8b9e9b",font=ffont).pack()
+        no = tk.Radiobutton(frame,text="No",variable=op,value=2,bg="#8b9e9b",font=ffont).pack()
+        btnatras = tk.Button(frame,text="Back",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Next",command=next,bg="#8b9e9b",font=fontboton).pack(side="right")
         return op
     elif paso == 3 and lang.get() == 2:
         nuevomarco()
-        resta = tk.Entry(frame,width=5)
-        btnatras = tk.Button(frame,text="Atras",command=back).pack(side="left")
+        resta = tk.Entry(frame,width=3,font=fontentry)
+        
         if op.get() == 1:
             msj.set("Ahora resta el numero invertido menos el numero pensado")
-            resta.pack()
-            ok = tk.Button(frame,text="Cargar",command=asignarresta).pack()
+            resta.pack(fill = tk.Y)
+            ok = tk.Button(frame,text="Cargar",command=asignarresta,bg="#8b9e9b",font=fontboton).pack(side="right")
         if op.get() == 2:
             msj.set("Ahora resta el numero pensado menos el numero invertido")
-            resta.pack()
-            ok = tk.Button(frame,text="Cargar",command=asignarresta).pack()
+            resta.pack(fill = tk.Y)
+            ok = tk.Button(frame,text="Cargar",command=asignarresta,bg="#8b9e9b",font=fontboton).pack(side="right")
+        btnatras = tk.Button(frame,text="Atras",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
         return resta
     elif paso == 3 and lang.get() == 1:
         nuevomarco()
-        resta = tk.Entry(frame,width=5)
-        btnatras = tk.Button(frame,text="Back",command=back).pack(side="left")
+        resta = tk.Entry(frame,width=3,font=fontentry)
+        
         if op.get() == 1:
             msj.set("Now subtract the inverted number minus the thought number")
-            resta.pack()
-            ok = tk.Button(frame,text="Load",command=asignarresta).pack()
+            resta.pack(fill = tk.Y)
+            ok = tk.Button(frame,text="Load",command=asignarresta,bg="#8b9e9b",font=fontboton).pack(side="right")
         if op.get() == 2:
             msj.set("Now subtract the number thought minus the number inverted")
-            resta.pack()
-            ok = tk.Button(frame,text="Load",command=asignarresta).pack()
+            resta.pack(fill = tk.Y)
+            ok = tk.Button(frame,text="Load",command=asignarresta,bg="#8b9e9b",font=fontboton).pack(side="right")
+        btnatras = tk.Button(frame,text="Back",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
         return resta
     elif paso == 4 and lang.get() == 2:
         nuevomarco()
-        btnatras = tk.Button(frame,text="Atras",command=back).pack(side="left")
+        
         msj.set("ahora suma las dos cifras del numero pensado al principio")
-        suma = tk.Entry(frame,width=5)
-        suma.pack()
-        ok = tk.Button(frame,text="Cargar",command=asignarsuma).pack()
+        suma = tk.Entry(frame,width=3,font=fontentry)
+        suma.pack(fill = tk.Y)
+        btnatras = tk.Button(frame,text="Atras",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        ok = tk.Button(frame,text="Cargar",command=asignarsuma,bg="#8b9e9b",font=fontboton).pack(side="right")
         return suma
     elif paso == 4 and lang.get() == 1:
         nuevomarco()
-        btnatras = tk.Button(frame,text="Back",command=back).pack(side="left")
-        msj.set("now add the two digits of the number you thought at the beginning")
-        suma = tk.Entry(frame,width=5)
-        suma.pack()
-        ok = tk.Button(frame,text="Load",command=asignarsuma).pack()
+        
+        msj.set("now sum the two digits of the number you thought at the beginning")
+        suma = tk.Entry(frame,width=3,font=fontentry)
+        suma.pack(fill = tk.Y)
+        btnatras = tk.Button(frame,text="Back",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        ok = tk.Button(frame,text="Load",command=asignarsuma,bg="#8b9e9b",font=fontboton).pack(side="right")
         return suma
     elif paso == 5 and lang.get() == 2:
         nuevomarco()
         calcular()
         msj.set(f"El numero que pensaste es: ")
-        lll = tk.Label(frame,text=f"{valorFinal.get()}",font=("Helvetica",26)).pack()
-        btnatras = tk.Button(frame,text="Atras",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Reiniciar",command=restart).pack(side="right")
+        lll = tk.Label(frame,text=f"{valorFinal.get()}",bg="#8b9e9b",font=("Helvetica",50)).pack()
+        btnatras = tk.Button(frame,text="Atras",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Reiniciar",command=restart,bg="#8b9e9b",font=fontboton).pack(side="right")
     elif paso == 5 and lang.get() == 1:
         nuevomarco()
         calcular()
         msj.set(f"The number you thought is: ")
-        lll = tk.Label(frame,text=f"{valorFinal.get()}",font=("Helvetica",26)).pack()
-        btnatras = tk.Button(frame,text="Back",command=back).pack(side="left")
-        btnsig = tk.Button(frame,text="Restart",command=restart).pack(side="right")
+        lll = tk.Label(frame,text=f"{valorFinal.get()}",bg="#8b9e9b",font=("Helvetica",50)).pack()
+        btnatras = tk.Button(frame,text="Back",command=back,bg="#8b9e9b",font=fontboton).pack(side="left")
+        btnsig = tk.Button(frame,text="Restart",command=restart,bg="#8b9e9b",font=fontboton).pack(side="right")
 def nuevomarco():
     global frame
     frame.pack_forget()
     if lang.get() == 2:
-        frame = tk.LabelFrame(ventana,text="Adivinanza de numeros")
+        frame = tk.LabelFrame(ventana,text="Adivinanza de numeros",font=ffont,bg="#a65d53")
         frame.pack(fill="both",expand="yes")
-        lblmsj = tk.Label(frame,textvariable=msj).pack()
+        lblmsj = tk.Label(frame,textvariable=msj,font=ffont,bg="#a65d53").pack()
     elif lang.get() == 1:
-        frame = tk.LabelFrame(ventana,text="Number riddle")
+        frame = tk.LabelFrame(ventana,text="Number riddle",font=ffont,bg="#a65d53")
         frame.pack(fill="both",expand="yes")
-        lblmsj = tk.Label(frame,textvariable=msj).pack()
+        lblmsj = tk.Label(frame,textvariable=msj,font=ffont,bg="#a65d53").pack()
 def restart():
     global paso
     paso = -1
@@ -123,12 +130,14 @@ def restart():
     return paso
 def asignarresta():
     global valorResta,resta
-    valorResta.set(resta.get())
-    next()
+    if resta.get() != "0" and resta.get() != "" and resta.get().isnumeric():
+        valorResta.set(resta.get())
+        next()
 def asignarsuma():
     global valorSuma,suma
-    valorSuma.set(suma.get())
-    next()
+    if suma.get() != "0" and suma.get() !="" and suma.get().isnumeric():
+        valorSuma.set(suma.get())
+        next()
 def calcular():
     global op, valorFinal
     k = valorResta.get() /9
@@ -155,8 +164,8 @@ def back():
 #   Ventana Principal
 ventana = tk.Tk()
 ventana.title("Juego Matematico - Adivinar Numero")
-ventana.configure(bd=5,bg="#e4844a",padx=20,pady=20)
-ventana.geometry("400x180")
+ventana.configure(relief="sunken",bd=5,bg="#63072c",padx=20,pady=20)
+ventana.geometry("700x220")
 op = tk.IntVar()
 lang = tk.IntVar()
 lang.set(2)
@@ -166,9 +175,9 @@ valorFinal = tk.IntVar()
 
 #   Mensaje
 msj = tk.StringVar()
-frame = tk.LabelFrame(ventana,text="Adivinanza de numeros")
+frame = tk.LabelFrame(ventana,text="Adivinanza de numeros",font=ffont,bg="#a65d53")
 frame.pack(fill="both",expand="yes")
-lblmsj = tk.Label(frame,textvariable=msj)
+lblmsj = tk.Label(frame,textvariable=msj,font=ffont)
 lblmsj.pack()
 mostrarmsj()
 #   Boton Siguiente
